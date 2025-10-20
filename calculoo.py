@@ -4,15 +4,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-# Parámetros fijos (no necesitas cambiarlos)
 A = 0.2
 k = 2.0
 m = 0.5
 omega_default = np.sqrt(k / m)
 
-# Construcción del contexto "seguro" para eval
+
 safe_dict = {'np': np, 'A': A, 'k': k, 'm': m, 'omega': omega_default, 'pi': np.pi, 'e': np.e}
-# Añadir funciones numpy directamente (sin exposición completa innecesaria)
+
 for name in ['sin','cos','tan','exp','sqrt','log','abs','arctan','arcsin','arccos']:
     safe_dict[name] = getattr(np, name)
 
@@ -29,7 +28,6 @@ def safe_eval(expr, t):
 def numeric_derivative(y, t):
     return np.gradient(y, t)
 
-# Interfaz simple
 class SimpleMAS(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -50,7 +48,6 @@ class SimpleMAS(tk.Tk):
         self.entry_y = ttk.Entry(left, width=30)
         self.entry_y.pack(fill="x", pady=(0,6))
 
-        # Tiempo y resolución (pequeño)
         ttk.Label(left, text="t0, t1, puntos").pack(anchor="w", pady=(6,0))
         tframe = ttk.Frame(left)
         tframe.pack(fill="x", pady=(0,6))
@@ -61,7 +58,6 @@ class SimpleMAS(tk.Tk):
         ttk.Entry(tframe, textvariable=self.t1, width=6).grid(row=0, column=1, padx=4)
         ttk.Entry(tframe, textvariable=self.npoints, width=6).grid(row=0, column=2)
 
-        # Tipo de gráfica (mínimo)
         ttk.Label(left, text="Tipo de gráfica:").pack(anchor="w", pady=(6,0))
         self.plot_type = tk.StringVar(value="pos1d")
         ttk.Radiobutton(left, text="Posición 1D (x vs t)", variable=self.plot_type, value="pos1d").pack(anchor="w")
@@ -75,7 +71,6 @@ class SimpleMAS(tk.Tk):
         ttk.Button(btns, text="Guardar imagen...", command=self.save).pack(side="left", padx=4)
         ttk.Button(btns, text="Ayuda", command=self.help).pack(side="left", padx=4)
 
-        # Área de figura (derecha)
         right = ttk.Frame(self)
         right.pack(side="left", fill="both", expand=True)
         self.fig, self.ax = plt.subplots(figsize=(7,5))
@@ -160,3 +155,4 @@ class SimpleMAS(tk.Tk):
 if __name__ == "__main__":
     app = SimpleMAS()
     app.mainloop()
+
