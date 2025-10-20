@@ -18,7 +18,8 @@ Qué hace
    pip install numpy matplotlib
 
 # Luego se ejecuta por el comando en la terminal:
-
+ ```bash
+python calculoo.py   
+ 
+# Y si es necesario primero con cd se dirige a la carpeta de origen del archivo descargado y se ejecuta
 python calculoo.py
-
-y si es necesario primero con cd se dirige a la carpeta de origen del archivo descargado y se ejecuta python calculoo.py
